@@ -16,8 +16,8 @@ public class ApisfvApplication {
 	private String applicationName;
 	
 	
-	@GetMapping("/hello")
-	public String helloWorld() {
+	@GetMapping("/appName")
+	public String appName() {
 		return applicationName;
 	}
 	public static void main(String[] args) {
