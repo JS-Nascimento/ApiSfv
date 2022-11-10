@@ -1,45 +1,15 @@
 package dev.jstec.apisfv.domain.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import dev.jstec.apisfv.domain.entity.Client;
 
 @Repository
-public class Clients {
+public interface Clients extends JpaRepository<Client, Integer> {
 	
-	public static final String INSERT ="insert into cliente (nome) values (?)";
-	public static final String SELECT_ALL ="Select * from cliente";
-	
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
-	public Client save(Client client) {
-		
-		jdbcTemplate.update( INSERT, new Object[] {client.getName()} );
-		
-		return client;
-	};
-	
-	public List<Client> findAll(){
-		
-		return jdbcTemplate.query(SELECT_ALL, new RowMapper<Client>() {
-			
-
-			@Override
-			public Client mapRow(ResultSet resultSet, int i) throws SQLException {
-				Integer id = resultSet.getInt("id");
-				String name = resultSet.getString("nome");
-				return new Client(id, name);
-			}
-		});
-		
-		
-	};
+	List<Client> findByNameLike(String name);
 }
+
