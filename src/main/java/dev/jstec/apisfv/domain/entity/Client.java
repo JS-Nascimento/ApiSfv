@@ -1,10 +1,13 @@
 package dev.jstec.apisfv.domain.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,9 +28,20 @@ public class Client {
 		this.name = name;
 	}
 	
+	//obtem todos os pedidos de um cliente
 	
+	@OneToMany(mappedBy = "client")
+	private Set<Order> orders;
 
 	
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+
 	public Client(Integer id, String name) {
 		
 		this.id = id;

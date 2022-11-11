@@ -2,9 +2,22 @@ package dev.jstec.apisfv.domain.entity;
 
 import java.math.BigDecimal;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Product {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	private String description;
+    private BigDecimal price;
+	
     public Integer getId() {
 		return id;
 	}
@@ -23,8 +36,7 @@ public class Product {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-	private String description;
-    private BigDecimal price;
+
 
 	
 }
