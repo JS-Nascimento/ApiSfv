@@ -75,4 +75,9 @@ public class SaleOrder {
 		this.total = total;
 	}
 
+	@Override
+	public String toString() {
+		return "SaleOrder [id=" + id + ", orderDate=" + orderDate + ", total=" + total + "]";
+	}
+
 }
