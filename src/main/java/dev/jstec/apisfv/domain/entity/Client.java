@@ -1,11 +1,8 @@
 package dev.jstec.apisfv.domain.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Set;
+
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -33,6 +30,19 @@ public class Client {
 		this.name = name;
 	}
 
+	 @OneToMany( mappedBy = "client" , fetch = FetchType.LAZY )
+	    private Set<SaleOrder> order;
+
+	   
+
+	    public Set<SaleOrder> getOrders() {
+	        return order;
+	    }
+
+	    public void setOrders(Set<SaleOrder> order) {
+	        this.order = order;
+	    }
+	
 	public Integer getId() {
 		return id;
 	}
