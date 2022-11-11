@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
 import dev.jstec.apisfv.domain.entity.Client;
 
 

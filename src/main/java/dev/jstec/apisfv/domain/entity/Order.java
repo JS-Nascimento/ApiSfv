@@ -30,15 +30,7 @@ public class Order {
 	@Column(name="total", length = 20, precision = 2)
 	private BigDecimal total;
 	
-	//@OneToMany(mappedBy="order")
-	//private List<OrderItem> items;
 	
-	//public List<OrderItem> getItems() {
-	//	return items;
-	//}
-	//public void setItems(List<OrderItem> items) {
-	//	this.items = items;
-	//}
 	public Integer getId() {
 		return id;
 	}
