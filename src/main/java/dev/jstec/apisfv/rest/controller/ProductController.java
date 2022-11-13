@@ -1,4 +1,4 @@
-package dev.jstec.apisfv.controller;
+package dev.jstec.apisfv.rest.controller;
 
 import java.util.List;
 
@@ -67,7 +67,7 @@ public class ProductController {
 	
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public Product updateproduct(@PathVariable Integer id, @RequestBody Product product) {
+	public Product update(@PathVariable Integer id, @RequestBody Product product) {
 		
 		return products
 				.findById(id)
@@ -80,14 +80,14 @@ public class ProductController {
 	}
 	
 	@GetMapping
-	public List<Product> findproduct(Product filteredproduct) {
+	public List<Product> find(Product filteredProduct) {
 		
 		ExampleMatcher matcher = ExampleMatcher
 								.matching()
 								.withIgnoreCase()
 								.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 		
-		Example<Product> example = Example.of(filteredproduct, matcher)	;	
+		Example<Product> example = Example.of(filteredProduct, matcher)	;	
 		return products.findAll(example);
 		
 		

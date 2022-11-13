@@ -2,6 +2,7 @@ package dev.jstec.apisfv.domain.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,6 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table
 public class SaleOrder {
@@ -34,50 +41,14 @@ public class SaleOrder {
 
 	@OneToMany(mappedBy = "order")
 	private List<OrderItem> items;
-
-	public List<OrderItem> getItems() {
-		return items;
+	
+	public List<OrderItem> getItems(){
+		if(this.items == null) {
+			this.items = new ArrayList<>();
+		}
+		return this.items;
 	}
 
-	public void setItems(List<OrderItem> items) {
-		this.items = items;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
-
-	public LocalDate getOrderDate() {
-		return orderDate;
-	}
-
-	public void setOrderDate(LocalDate orderDate) {
-		this.orderDate = orderDate;
-	}
-
-	public BigDecimal getTotal() {
-		return total;
-	}
-
-	public void setTotal(BigDecimal total) {
-		this.total = total;
-	}
-
-	@Override
-	public String toString() {
-		return "SaleOrder [id=" + id + ", orderDate=" + orderDate + ", total=" + total + "]";
-	}
+	
 
 }

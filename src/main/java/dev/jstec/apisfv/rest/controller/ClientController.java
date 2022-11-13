@@ -1,4 +1,4 @@
-package dev.jstec.apisfv.controller;
+package dev.jstec.apisfv.rest.controller;
 
 import java.util.List;
 
