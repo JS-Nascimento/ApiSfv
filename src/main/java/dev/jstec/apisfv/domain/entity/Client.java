@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table
 public class Client {
@@ -12,6 +14,9 @@ public class Client {
 	@Column
 	private Integer id;
 	private String name;
+	
+	@Column(name ="cpf", length = 11)
+	private String cpf;
 	
 	public Client() {
 		
@@ -29,8 +34,10 @@ public class Client {
 		this.id = id;
 		this.name = name;
 	}
-
-	 @OneToMany( mappedBy = "client" , fetch = FetchType.LAZY )
+	
+	
+	 	@JsonIgnore
+	 	@OneToMany( mappedBy = "client" , fetch = FetchType.LAZY )
 	    private Set<SaleOrder> order;
 
 	   
@@ -54,6 +61,16 @@ public class Client {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	@Override
