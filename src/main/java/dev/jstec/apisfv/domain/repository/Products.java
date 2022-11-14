@@ -6,5 +6,7 @@ import dev.jstec.apisfv.domain.entity.Product;
 
 public interface Products extends JpaRepository<Product, Integer>{
 	
+	
+	
 
 }
