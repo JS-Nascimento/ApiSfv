@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class SaleOrderServiceImplementation implements SaleOrderService {
-	
+
 	private final SaleOrders repository;
 	private final Clients clientsRepository;
 	private final Products productsRepository;
@@ -36,48 +36,42 @@ public class SaleOrderServiceImplementation implements SaleOrderService {
 	@Override
 	@Transactional
 	public SaleOrder save(SaleOrdersDTO dto) {
-		 Integer idCliente = dto.getClient_Id();
-	        Client client = clientsRepository
-	                .findById(idCliente)
-							.orElseThrow( () -> 
-						new BusinessRoleException("Client not exist !!"));
-		
+		Integer idCliente = dto.getClient_Id();
+		Client client = clientsRepository.findById(idCliente)
+				.orElseThrow(() -> new BusinessRoleException("Client not exist !!"));
+
 		SaleOrder order = new SaleOrder();
 		order.setTotal(dto.getTotal());
 		order.setOrderDate(LocalDate.now());
 		order.setClient(client);
 		order.setStatus(OrderStatus.REALIZADO);
-		
+
 		List<OrderItem> orderItems = transformItems(order, dto.getItems());
 		repository.save(order);
 		itemsRepository.saveAll(orderItems);
 		order.setItems(orderItems);
-		
+
 		return order;
 	}
-	
-	private List<OrderItem> transformItems (SaleOrder order, List<OrderItemDTO> items) {
-		
-		if(items.isEmpty()) {
+
+	private List<OrderItem> transformItems(SaleOrder order, List<OrderItemDTO> items) {
+
+		if (items.isEmpty()) {
 			throw new BusinessRoleException("Order has no items !!!");
 		}
-		
-		return items
-				.stream()
-				.map ( dto -> {
-					Integer product_Id = dto.getProduct_Id();
-					Product product = productsRepository
-									.findById(product_Id)
-									.orElseThrow( () -> new BusinessRoleException("Product no has exist : " + product_Id
-											));
-					
-					OrderItem orderItem = new OrderItem();
-					orderItem.setQuantity(dto.getQuantity());
-					orderItem.setOrder(order);
-					orderItem.setProduct(product);
-					return orderItem;
-				}).collect(Collectors.toList());
-		
+
+		return items.stream().map(dto -> {
+			Integer product_Id = dto.getProduct_Id();
+			Product product = productsRepository.findById(product_Id)
+					.orElseThrow(() -> new BusinessRoleException("Product no has exist : " + product_Id));
+
+			OrderItem orderItem = new OrderItem();
+			orderItem.setQuantity(dto.getQuantity());
+			orderItem.setOrder(order);
+			orderItem.setProduct(product);
+			return orderItem;
+		}).collect(Collectors.toList());
+
 	}
 
 	@Override
@@ -88,13 +82,11 @@ public class SaleOrderServiceImplementation implements SaleOrderService {
 	@Override
 	@Transactional
 	public void statusUpdate(Integer id, OrderStatus statusPedido) {
-		repository
-			.findById(id)
-			.map( order -> {
-				order.setStatus(statusPedido);
-				return repository.save(order);
-			}).orElseThrow( () -> new  OrderNotFoundException() );
-		
+		repository.findById(id).map(order -> {
+			order.setStatus(statusPedido);
+			return repository.save(order);
+		}).orElseThrow(() -> new OrderNotFoundException());
+
 	}
-	
+
 }

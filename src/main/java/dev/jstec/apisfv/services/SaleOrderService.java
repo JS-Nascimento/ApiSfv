@@ -8,9 +8,9 @@ import dev.jstec.apisfv.rest.dto.SaleOrdersDTO;
 
 public interface SaleOrderService {
 
-		SaleOrder save (SaleOrdersDTO dto);
-		
-		Optional <SaleOrder> getOrderInfo(Integer id);
-		
-		void statusUpdate(Integer id, OrderStatus statusPedido );
+	SaleOrder save(SaleOrdersDTO dto);
+
+	Optional<SaleOrder> getOrderInfo(Integer id);
+
+	void statusUpdate(Integer id, OrderStatus statusPedido);
 }

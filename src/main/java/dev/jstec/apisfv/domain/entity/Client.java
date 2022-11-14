@@ -3,6 +3,9 @@ package dev.jstec.apisfv.domain.entity;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,9 +22,14 @@ public class Client {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Integer id;
+	
+	@Column(name="name", length =100)
+	@NotEmpty(message="Client name cannot be empty!")
 	private String name;
 	
 	@Column(name ="cpf", length = 11)
+	@NotEmpty(message="Client CPF cannot be empty!")
+	@CPF(message = "Client CPF is not valid!")
 	private String cpf;
 	
 	public Client(Integer id, String name) {

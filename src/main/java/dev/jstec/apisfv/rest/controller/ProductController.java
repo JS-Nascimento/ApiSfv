@@ -2,6 +2,8 @@ package dev.jstec.apisfv.rest.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
@@ -45,7 +47,7 @@ public class ProductController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Product saveProduct(@RequestBody Product product) {
+	public Product saveProduct(@RequestBody @Valid Product product) {
 		 
 		return products.save(product);
 	}
@@ -67,7 +69,7 @@ public class ProductController {
 	
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public Product update(@PathVariable Integer id, @RequestBody Product product) {
+	public Product update(@PathVariable Integer id, @RequestBody @Valid Product product) {
 		
 		return products
 				.findById(id)

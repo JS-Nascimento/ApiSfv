@@ -2,6 +2,8 @@ package dev.jstec.apisfv.rest.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
@@ -44,7 +46,7 @@ public class ClientController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Client saveClient(@RequestBody Client client) {
+	public Client saveClient(@RequestBody @Valid Client client) {
 		 
 		return clients.save(client);
 	}
@@ -67,7 +69,7 @@ public class ClientController {
 	
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public Client updateClient(@PathVariable Integer id, @RequestBody Client client) {
+	public Client updateClient(@PathVariable Integer id, @RequestBody @Valid Client client) {
 		
 		return clients
 				.findById(id)
