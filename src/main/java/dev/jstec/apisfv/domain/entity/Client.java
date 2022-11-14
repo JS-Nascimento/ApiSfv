@@ -35,12 +35,7 @@ public class Client {
 	 	@OneToMany( mappedBy = "client" , fetch = FetchType.LAZY )
 	    private Set<SaleOrder> order;
 	
-	    public Set<SaleOrder> getOrders() {
-	        return order;
-	    }
-	    public void setOrders(Set<SaleOrder> order) {
-	        this.order = order;
-	    }
+	   	    
 	
 
 }

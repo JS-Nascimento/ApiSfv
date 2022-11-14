@@ -13,6 +13,8 @@ public interface Clients extends JpaRepository<Client, Integer> {
 	
 	List<Client> findByNameLike(String name);
 	
+	
+	
 	@Query("select c from  Client c left join fetch c.order where c.id = :id ")
 	Client findClientFetchSaleOrder( @Param("id") Integer id );
 }

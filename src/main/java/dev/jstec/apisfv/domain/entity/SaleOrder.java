@@ -2,7 +2,6 @@ package dev.jstec.apisfv.domain.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -42,12 +41,7 @@ public class SaleOrder {
 	@OneToMany(mappedBy = "order")
 	private List<OrderItem> items;
 	
-	public List<OrderItem> getItems(){
-		if(this.items == null) {
-			this.items = new ArrayList<>();
-		}
-		return this.items;
-	}
+	
 
 	
 
