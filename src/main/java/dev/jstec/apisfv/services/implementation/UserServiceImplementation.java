@@ -30,11 +30,11 @@ public class UserServiceImplementation implements UserDetailsService {
 	    }
 	
 
-	 public UserDetails autenticar( UserLogin usuario ){
-	         UserDetails user = loadUserByUsername(usuario.getLogin());
-	         boolean senhasBatem = encoder.matches( usuario.getPassword(), user.getPassword() );
+	 public UserDetails authenticate( UserLogin userLogin ){
+	         UserDetails user = loadUserByUsername(userLogin.getLogin());
+	         boolean passwordsMatch = encoder.matches( userLogin.getPassword(), user.getPassword() );
 
-	         if(senhasBatem){
+	         if(passwordsMatch){
 	             return user;
 	         }
 
