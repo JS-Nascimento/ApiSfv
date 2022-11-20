@@ -20,9 +20,15 @@ import org.springframework.web.server.ResponseStatusException;
 
 import dev.jstec.apisfv.domain.entity.Client;
 import dev.jstec.apisfv.domain.repository.Clients;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("api/clients")
+@Api("Api Clientes")
 public class ClientController {
 
 	private Clients clients;
@@ -33,7 +39,13 @@ public class ClientController {
 	}
 
 	@GetMapping("{id}")
-	public Client getClientById(@PathVariable Integer id) {
+	@ApiOperation("Obter detalhes de um Cliente")
+	@ApiResponses({
+		@ApiResponse(code = 200, message ="Requisição bem sucedida"),
+		@ApiResponse(code = 404, message ="Requisição não encontrada")
+	})
+	public Client getClientById(@PathVariable 
+									@ApiParam("ID do Cliente") Integer id) {
 		
 		return clients
 				.findById(id)
@@ -46,6 +58,11 @@ public class ClientController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@ApiOperation("Persisti novo Cliente")
+	@ApiResponses({
+		@ApiResponse(code = 201, message ="Requisição criada com sucesso"),
+		@ApiResponse(code = 404, message ="Requisição não encontrada")
+	})
 	public Client saveClient(@RequestBody @Valid Client client) {
 		 
 		return clients.save(client);

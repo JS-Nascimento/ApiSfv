@@ -8,11 +8,10 @@ import java.util.HashMap;
 
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+
 import org.springframework.stereotype.Service;
 
-import dev.jstec.apisfv.ApisfvApplication;
+
 import dev.jstec.apisfv.domain.entity.UserLogin;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -82,19 +81,19 @@ public class JwtService {
 	
 	
 	
-	public static void main(String[] args) {
-		
-		
-		ConfigurableApplicationContext contexto = SpringApplication.run(ApisfvApplication.class) ;
-				JwtService service = contexto.getBean(JwtService.class);
-			UserLogin userLogin = UserLogin.builder().login("Fulano").build();
-			String token = service.generateToken(userLogin);
-			System.out.println(token);
-			
-			boolean isTokenValido = service.validateToken(token);
-			System.out.println("o token esta valido ? " + isTokenValido);
-			
-			System.out.println(service.getUserLogin(token));
-		
-	}
+//	public static void main(String[] args) {
+//		
+//		
+//		ConfigurableApplicationContext contexto = SpringApplication.run(ApisfvApplication.class) ;
+//				JwtService service = contexto.getBean(JwtService.class);
+//			UserLogin userLogin = UserLogin.builder().login("Fulano").build();
+//			String token = service.generateToken(userLogin);
+//			System.out.println(token);
+//			
+//			boolean isTokenValido = service.validateToken(token);
+//			System.out.println("o token esta valido ? " + isTokenValido);
+//			
+//			System.out.println(service.getUserLogin(token));
+//		
+//	}
 }

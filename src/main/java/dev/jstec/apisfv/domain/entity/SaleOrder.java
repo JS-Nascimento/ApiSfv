@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 public class SaleOrder {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@ManyToOne

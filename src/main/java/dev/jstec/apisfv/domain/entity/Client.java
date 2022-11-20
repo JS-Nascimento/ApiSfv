@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Table
 public class Client {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Integer id;
 	
